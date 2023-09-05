@@ -1,5 +1,7 @@
 ## PlungerDriver Parts
 
+### PCB
+
 |  # | Part name                           | RefDes  | DigiKey                           |
 |---:|-------------------------------------|---------|-----------------------------------|
 |  3 | C 100nF 50V X7R (0805)              | C1-C3   | 478-KGM21NR71H104KMCT-ND          |
@@ -22,3 +24,11 @@
 |  1 | U Micro PIC16F1454 (TSSOP-14)       | U1      | PIC16F1454-I/ST-ND                |
 |  1 | U Driver TB67H450AFNG (SOIC-8)      | U2      | 264-TB67H450AFNGELCT-ND           |
 |  1 | VR Linear AP7380-33Y (SOT89-3)      | VR1     | AP7380-33Y-13DICT-ND              |
+
+
+### Else
+
+|  # | Part name                                     | Location                                                           |
+|---:|-----------------------------------------------|--------------------------------------------------------------------|
+|  1 | Bringsmart Motor 6V 30rpm N20 Screw M3x55     | [AliExpress](https://www.aliexpress.us/item/2251832736580698.html) |
+
