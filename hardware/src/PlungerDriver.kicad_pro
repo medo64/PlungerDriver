@@ -475,8 +475,8 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
-      "vrml": ""
+      "step": "PlungerDriver.step",
+      "vrml": "PlungerDriver.wrl"
     },
     "page_layout_descr_file": ""
   },
