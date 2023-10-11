@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "app.h"
+#include "io.h"
 #include "rotary.h"
 #include "ssd1306.h"
 #include "watchdog.h"
@@ -27,8 +28,17 @@ void main(void) {
     ssd1306_writeLine16(" Plunger Driver ");
 
     uint8_t goneLeft = false;
+    bool flipped = false;
     while(true) {
         watchdog_clear();
+        if (io_in_rot_button()) {
+            io_in_rot_button_wait_release();
+            flipped = !flipped;
+            ssd1306_displayFlip(flipped);
+            ssd1306_clearAll();
+            ssd1306_writeLine16(" Plunger Driver ");
+        }
+
         enum ROTARY_DIRECTION dir = rotary_getDirection();
         ssd1306_moveTo(4, 1);
         if (dir != ROTARY_DIRECTION_NONE) {
@@ -38,12 +48,12 @@ void main(void) {
                 goneLeft = false;
             }
         }
-        
+
         if (timer0_wasTriggered()) {
             if (goneLeft) {
-                ssd1306_write("L");
+                ssd1306_writeCharacter(0x1B);
             } else {
-                ssd1306_write("R");
+                ssd1306_writeCharacter(0x1A);
             }            
         }
     }
