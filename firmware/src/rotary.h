@@ -4,14 +4,14 @@
  * Handling rotary button with quadrature encoding
  * 
  * Defines:
- *   _ROTARY_INPUT_A_PORT <N>: Input A port; e.g. PORTAbits.RA0
- *   _ROTARY_INPUT_B_PORT <N>: Input B port, e.g. PORTAbits.RA1
- *   _ROTARY_INPUT_A_TRIS <N>: Input A port TRIS value; e.g. TRISAbits.TRISA0; optional
- *   _ROTARY_INPUT_B_TRIS <N>: Input B port TRIS value, e.g. TRISAbits.TRISA1; optional
- *   _ROTARY_FILTER_DETENT_12: Filter input to every 4th value (12 PPR)
- *   _ROTARY_FILTER_DETENT_24: Filter input to every 2nd value (24 PPR)
+ *   _ROTARY_INPUT_A_PORT <X>: Input A port; e.g. A
+ *   _ROTARY_INPUT_A_PIN <X>: Input A port TRIS value; e.g. 0
+ *   _ROTARY_INPUT_B_PORT <X>: Input B port; e.g. A
+ *   _ROTARY_INPUT_B_PIN <X>: Input B port TRIS value, e.g. 0
+ *   _ROTARY_12_PPR: Use 12 pulses per rotation
+ *   _ROTARY_24_PPR: Use 24 pulses per rotation
  */
-// 2023-10-09: Included port definition
+// 2023-10-10: Included port definition
 
 #pragma once
 
@@ -27,10 +27,22 @@
 #error Must define _ROTARY_INPUT_B_PORT
 #endif
 
-#if !defined(_ROTARY_FILTER_DETENT_12) && !defined(_ROTARY_FILTER_DETENT_24)
-#error Must define either _ROTARY_FILTER_DETENT_12 or _ROTARY_FILTER_DETENT_24
-#elif defined(_ROTARY_FILTER_DETENT_12) && defined(_ROTARY_FILTER_DETENT_24)
-#error Cannot define both _ROTARY_FILTER_DETENT_12 and _ROTARY_FILTER_DETENT_24
+#if !defined(_ROTARY_INPUT_A_PIN)
+#error Must define _ROTARY_INPUT_A_PIN
+#elif (_ROTARY_INPUT_A_PIN < 0) || (_ROTARY_INPUT_A_PIN > 7)
+#error _ROTARY_INPUT_A_PIN must be between 0 and 7
+#endif
+
+#if !defined(_ROTARY_INPUT_B_PIN)
+#error Must define _ROTARY_INPUT_B_PIN
+#elif (_ROTARY_INPUT_B_PIN < 0) || (_ROTARY_INPUT_B_PIN > 7)
+#error _ROTARY_INPUT_B_PIN must be between 0 and 7
+#endif
+
+#if !defined(_ROTARY_12_PPR) && !defined(_ROTARY_24_PPR)
+#error Must define either _ROTARY_12_PPR or _ROTARY_24_PPR
+#elif defined(_ROTARY_12_PPR) && defined(_ROTARY_24_PPR)
+#error Cannot define both _ROTARY_12_PPR and _ROTARY_24_PPR
 #endif
 
 

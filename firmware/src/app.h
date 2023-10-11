@@ -3,11 +3,11 @@
 #define _SSD1306_FONT_8x8
 #define _SSD1306_FONT_8x16
 #define _SSD1306_NO_DISPLAY_CONTROL
-#define _ROTARY_INPUT_A_PORT         PORTCbits.RC4
-#define _ROTARY_INPUT_A_TRIS         TRISCbits.TRISC4
-#define _ROTARY_INPUT_B_PORT         PORTCbits.RC5
-#define _ROTARY_INPUT_B_TRIS         TRISCbits.TRISC5
-#define _ROTARY_FILTER_DETENT_24
+#define _ROTARY_INPUT_A_PORT         C
+#define _ROTARY_INPUT_A_PIN          4
+#define _ROTARY_INPUT_B_PORT         C
+#define _ROTARY_INPUT_B_PIN          5
+#define _ROTARY_24_PPR
 
 #pragma once
 
