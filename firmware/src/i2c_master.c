@@ -7,10 +7,10 @@
 
 #define I2C_BAUDRATE_COUNTER  (_XTAL_FREQ / 4 / _I2C_CLOCK_FREQENCY - 1)
 
-#define READ  1
-#define WRITE 0
-#define ACK   0
-#define NACK  1
+#define I2C_READ  1
+#define I2C_WRITE 0
+#define I2C_ACK   0
+#define I2C_NACK  1
 
 
 void waitIdle(void) {
@@ -46,8 +46,8 @@ void i2c_master_init() {
 }
 
 bool i2c_master_startRead(const uint8_t address) {
-    i2c_master_start();                                  // Start
-    return i2c_master_writeByte((uint8_t)((address << 1) | READ));  // load address
+    i2c_master_start();                                                 // Start
+    return i2c_master_writeByte((uint8_t)((address << 1) | I2C_READ));  // load address
 }
 
 bool i2c_master_readByte(uint8_t* value) {
@@ -56,14 +56,14 @@ bool i2c_master_readByte(uint8_t* value) {
     SSPCON2bits.RCEN = 1;                       // start receive
     while ( !SSPSTATbits.BF );                  // wait for byte
 
-    *value = SSPBUF;                             // read byte
+    *value = SSPBUF;                            // read byte
     if (SSPCON2bits.ACKSTAT) { return false; }  // end prematurely if there's an error
 
-    SSPCON2bits.ACKDT = ACK;                    // ACK for the last byte
+    SSPCON2bits.ACKDT = I2C_ACK;                // ACK for the last byte
     SSPCON2bits.ACKEN = 1;                      // initiate acknowledge sequence
     while (SSPCON2bits.ACKEN);                  // wait for done
 
-    return true;                                 // return success
+    return true;                                // return success
 }
 
 bool i2c_master_read(uint8_t* value, const uint8_t count) {
@@ -76,9 +76,9 @@ bool i2c_master_read(uint8_t* value, const uint8_t count) {
 
         value++;
 
-        ACKDT = (i < count-1) ? ACK : NACK;          // NACK for last byte
-        SSPCON2bits.ACKEN = 1;                      // initiate acknowledge sequence
-        while (SSPCON2bits.ACKEN);                  // wait for done
+        ACKDT = (i < count-1) ? I2C_ACK : I2C_NACK;  // NACK for last byte
+        SSPCON2bits.ACKEN = 1;                       // initiate acknowledge sequence
+        while (SSPCON2bits.ACKEN);                   // wait for done
     }
     return true;
 }
@@ -86,8 +86,8 @@ bool i2c_master_read(uint8_t* value, const uint8_t count) {
 
 bool i2c_master_startWrite(const uint8_t address) {
     waitIdle();
-    i2c_master_start();                                   // start operation
-    return i2c_master_writeByte((uint8_t)((address << 1) | WRITE));  // load address
+    i2c_master_start();                                                  // start operation
+    return i2c_master_writeByte((uint8_t)((address << 1) | I2C_WRITE));  // load address
 }
 
 bool i2c_master_writeByte(const uint8_t value) {
