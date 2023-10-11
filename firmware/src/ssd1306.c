@@ -254,14 +254,14 @@ bool ssd1306_drawCharacter(const uint8_t* data, const uint8_t count) {
 
     if (count >= 16) {
         writeRawCommand1(SSD1306_SET_PAGE_START_ADDRESS | (currentRow + 1));
-        writeRawData(&data[8], 8);
+        writeRawData(data + 8, 8);
 
         uint8_t currentColumnLow = (currentColumn << 3) & 0x0F;
         uint8_t currentColumnHigh = (currentColumn >> 1) & 0x0F;
         writeRawCommand1(SSD1306_SET_PAGE_START_ADDRESS | currentRow);
         writeRawCommand1(SSD1306_SET_LOWER_START_COLUMN_ADDRESS | currentColumnLow);
         writeRawCommand1(SSD1306_SET_UPPER_START_COLUMN_ADDRESS | currentColumnHigh);
-        writeRawData(&data[0], 8);
+        writeRawData(data, 8);
     } else {
         writeRawData(data, 8);
     }
@@ -272,31 +272,23 @@ bool ssd1306_drawCharacter(const uint8_t* data, const uint8_t count) {
 
 #if defined(_SSD1306_FONT_8x8)
 bool ssd1306_writeCharacter(const char value) {
-    uint8_t data[16];
-    if ((value <= 32) || (value >= 127)) {
-        for (uint8_t i = 0; i < sizeof(data); i++) { data[i] = 0; }
+    if ((value < 32) || (value > 126)) {
+        return ssd1306_drawCharacter(&font_8x8[0], 8);
     } else {
-        uint16_t offset = (uint16_t)((value - 33) << 3);  // *8
-        for (uint8_t i = 0; i < 8; i++) {
-            data[i] = font_8x8[offset + i];
-        }
+        uint16_t offset = (uint16_t)((value - 32) << 3);  // *8
+        return ssd1306_drawCharacter(&font_8x8[offset], 8);
     }
-    return ssd1306_drawCharacter(data, 8);
 }
 #endif
 
 #if defined(_SSD1306_FONT_8x16)
 bool ssd1306_writeCharacter16(const char value) {
-    uint8_t data[16];
-    if ((value <= 32) || (value >= 127)) {
-        for (uint8_t i = 0; i < sizeof(data); i++) { data[i] = 0; }
+    if ((value < 32) || (value > 126)) {
+        return ssd1306_drawCharacter(&font_8x16[0], 16);
     } else {
-        uint16_t offset = (uint16_t)((value - 33) << 4);  // *16
-        for (uint8_t i = 0; i < 16; i++) {
-            data[i] = font_8x16[offset + i];
-        }
+        uint16_t offset = (uint16_t)((value - 32) << 4);  // *16
+        return ssd1306_drawCharacter(&font_8x16[offset], 16);
     }
-    return ssd1306_drawCharacter(data, 16);
 }
 #endif
 
@@ -337,6 +329,15 @@ bool ssd1306_writeLine16(const char* text) {
 
 #if defined(_SSD1306_FONT_8x8)
 const uint8_t font_8x8[] = {
+          //     0x20
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
           // !   0x21
     0x00, // ░░░░░░░░
     0x06, // ░░░░░██░
@@ -1188,6 +1189,23 @@ const uint8_t font_8x8[] = {
 
 #if defined(_SSD1306_FONT_8x16)
 const uint8_t font_8x16[] = {
+          //     0x20
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
+    0x00, // ░░░░░░░░
           // !   0x21
     0x00, // ░░░░░░░░
     0x00, // ░░░░░░░░
