@@ -10,6 +10,7 @@
  *   _SSD1306_FONT_8x8:            Use 8-pixel high text
  *   _SSD1306_FONT_8x16:           Use 16-pixel high text
  *   _SSD1306_NO_DISPLAY_CONTROL:  Remove function for display control (displayOff, displayOn, displayInvert, displayNormal, setContrast)
+ *   _SSD1306_DISPLAY_FLIP:        Flips screen to other direction
  * Requires:
  *   i2c_master: Call "i2c_master_init" before ssd1306_init
  */

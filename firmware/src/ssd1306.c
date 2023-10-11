@@ -13,7 +13,8 @@
 #define SSD1306_SET_DISPLAY_START_LINE               0x40
 #define SSD1306_SET_CONTRAST_CONTROL                 0x81
 #define SSD1306_SET_CHARGE_PUMP                      0x8D
-#define SSD1306_SET_SEGMENT_REMAP                    0xA1
+#define SSD1306_SET_SEGMENT_REMAP_COL0               0xA0
+#define SSD1306_SET_SEGMENT_REMAP_COL127             0xA1
 #define SSD1306_ENTIRE_DISPLAY_ON                    0xA4
 #define SSD1306_ENTIRE_DISPLAY_ON_FORCED             0xA5
 #define SSD1306_SET_NORMAL_DISPLAY                   0xA6
@@ -22,7 +23,8 @@
 #define SSD1306_SET_DISPLAY_ON                       0xAF
 #define SSD1306_SET_MULTIPLEX_RATIO                  0xA8
 #define SSD1306_SET_PAGE_START_ADDRESS               0xB0
-#define SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION        0xC8
+#define SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION_INC    0xC0
+#define SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION_DEC    0xC8
 #define SSD1306_SET_DISPLAY_OFFSET                   0xD3
 #define SSD1306_SET_DISPLAY_CLOCK_DIVIDE_RATIO       0xD5
 #define SSD1306_SET_PRECHARGE_PERIOD                 0xD9
@@ -94,8 +96,13 @@ void ssd1306_init() {
     writeRawCommand2(SSD1306_SET_DISPLAY_OFFSET, 0x00);                           // Set Display Offset
     writeRawCommand1(SSD1306_SET_DISPLAY_START_LINE);                             // Set Display Start Line 
     writeRawCommand2(SSD1306_SET_CHARGE_PUMP, 0x14);                              // Set Charge Pump (0x10 external vcc, 0x14 internal vcc)
-    writeRawCommand1(SSD1306_SET_SEGMENT_REMAP);                                  // Set Segment Re-Map
-    writeRawCommand1(SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION);                      // Set COM Output Scan Direction
+    #if defined(_SSD1306_DISPLAY_FLIP)
+        writeRawCommand1(SSD1306_SET_SEGMENT_REMAP_COL127);                       // Set Segment Re-Map
+        writeRawCommand1(SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION_DEC);              // Set COM Output Scan Direction
+    #else
+        writeRawCommand1(SSD1306_SET_SEGMENT_REMAP_COL0);                         // Set Segment Re-Map
+        writeRawCommand1(SSD1306_SET_COM_OUTPUT_SCAN_DIRECTION_INC);              // Set COM Output Scan Direction
+    #endif
     #if (_SSD1306_DISPLAY_HEIGHT == 32)
         writeRawCommand2(SSD1306_SET_COM_PINS_HARDWARE_CONFIGURATION, 0x02);      // Set COM Pins Hardware Configuration (0x02 128x32)
         writeRawCommand2(SSD1306_SET_CONTRAST_CONTROL, 0x8F);                     // Set Contrast Control (0x8F 128x32; external vcc; internal vcc)
