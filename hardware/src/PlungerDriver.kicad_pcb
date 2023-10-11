@@ -1218,7 +1218,7 @@
         (effects (font (size 0.8 0.6) (thickness 0.15)))
       (tstamp 1827713f-29d9-42c7-a017-462e91b06185)
     )
-    (fp_text value "3K3" (at 2.7 0) (layer "F.SilkS")
+    (fp_text value "10K" (at 2.7 0) (layer "F.SilkS")
         (effects (font (size 0.8 0.6) (thickness 0.15)))
       (tstamp abef5f69-c79e-4818-b6cf-61a33b79e003)
     )
