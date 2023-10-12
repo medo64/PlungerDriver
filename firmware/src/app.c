@@ -49,7 +49,7 @@ void main(void) {
             }
         }
 
-        if (ticker_wasTriggered()) {
+        if (ticker_hasTicked()) {
             if (goneLeft) {
                 ssd1306_writeCharacter(0x1B);
             } else {

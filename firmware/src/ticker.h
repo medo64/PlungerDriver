@@ -6,7 +6,7 @@
  * Defines:
  *   _TICKER_USE_TIMER0: Use TMR0 for time management (default)
  */
-// 2023-10-09: Included port definition
+// 2023-10-11: Refactoring
 
 #pragma once
 
@@ -27,7 +27,7 @@ void ticker_init(void);
 void ticker_reset(void);
 
 /** Check if timer was triggered (24tps) since last check */
-inline bool ticker_wasTriggered(void);
+inline bool ticker_hasTicked(void);
 
 /** waits for a full tick (1/24th of a second) */
 void ticker_waitTick(void);

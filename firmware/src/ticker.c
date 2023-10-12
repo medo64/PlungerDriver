@@ -37,7 +37,7 @@ void ticker_reset(void) {
     counter = 0;
 }
 
-inline bool ticker_wasTriggered(void) {  // 24x per second
+inline bool ticker_hasTicked(void) {  // 24x per second
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0;
         if (counter == TICKER_TIMER0_TARGET) {
@@ -52,14 +52,14 @@ inline bool ticker_wasTriggered(void) {  // 24x per second
 
 void ticker_waitTick(void) {
     ticker_reset();
-    while (!ticker_wasTriggered()) { __asm("CLRWDT"); }
+    while (!ticker_hasTicked()) { __asm("CLRWDT"); }
 }
 
 void ticker_waitTicks(uint8_t tickCount) {
     ticker_reset();
     while (true) {
         if (tickCount == 0) { break; }
-        while (!ticker_wasTriggered()) { __asm("CLRWDT"); }
+        while (!ticker_hasTicked()) { __asm("CLRWDT"); }
         tickCount--;
     }
 }
