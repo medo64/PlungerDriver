@@ -10,7 +10,6 @@
  *   _ROTARY_INPUT_A_PIN <X>:  Input A port TRIS value; e.g. 0
  *   _ROTARY_INPUT_B_PORT <X>: Input B port; e.g. A
  *   _ROTARY_INPUT_B_PIN <X>:  Input B port TRIS value, e.g. 0
- *   _ROTARY_DETENTS:          Rotary switch uses detents
  * Required:
  *   Set pins as input (TRIS)
  */

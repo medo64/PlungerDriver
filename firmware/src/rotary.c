@@ -9,6 +9,7 @@
 #define ROTARY_INPUT_B_PORT_PIN     CONCATENATE(R, _ROTARY_INPUT_B_PORT, _ROTARY_INPUT_B_PIN)
 
 uint8_t lastRotState;
+uint8_t histRotState;
 
 inline uint8_t getRotaryState(void) {  // figure out what state we're in
     return (ROTARY_INPUT_A_PORT_PIN ? 0b10 : 0b00) | (ROTARY_INPUT_B_PORT_PIN ? 0b01 : 0b00);
@@ -16,18 +17,17 @@ inline uint8_t getRotaryState(void) {  // figure out what state we're in
 
 void rotary_init(void) {
     lastRotState = getRotaryState();
+    histRotState = lastRotState;
 }
 
 enum ROTARY_DIRECTION rotary_getDirection(void) {
     uint8_t currRotState = getRotaryState();
     if (currRotState != lastRotState) {
-        if (lastRotState == 0) {
-            lastRotState = currRotState;
-            if (currRotState == 1) { return ROTARY_DIRECTION_LEFT; }
-            if (currRotState == 2) { return ROTARY_DIRECTION_RIGHT; }
-        } else {
-            lastRotState = currRotState;
-        }
+        histRotState = (uint8_t)(histRotState << 2) | currRotState;
+        lastRotState = currRotState;
+        uint8_t filteredRotState = histRotState & 0x3F;
+        if (filteredRotState == 0x07) { return ROTARY_DIRECTION_LEFT; }
+        if (filteredRotState == 0x0B) { return ROTARY_DIRECTION_RIGHT; }
     }
     return ROTARY_DIRECTION_NONE;
 }
