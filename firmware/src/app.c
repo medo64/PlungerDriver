@@ -20,7 +20,7 @@ void init(void) {
 void main(void) {
     init();
     watchdog_init();
-    
+
     i2c_master_init();
     ssd1306_init();
     ticker_init();
@@ -40,7 +40,7 @@ void main(void) {
         }
 
         enum ROTARY_DIRECTION dir = rotary_getDirection();
-        ssd1306_moveTo(4, 1);
+        ssd1306_moveTo(4, 9);
         if (dir != ROTARY_DIRECTION_NONE) {
             if (dir == ROTARY_DIRECTION_LEFT) {
                 goneLeft = true;
@@ -54,7 +54,7 @@ void main(void) {
                 ssd1306_writeCharacter(0x1B);
             } else {
                 ssd1306_writeCharacter(0x1A);
-            }            
+            }
         }
     }
 }
