@@ -1,6 +1,7 @@
 /* Josip Medved <jmedved@jmedved.com> * www.medo64.com * MIT License */
 
 #include <xc.h>
+#include "app.h"
 #include "watchdog.h"
 
 void watchdog_init(void) {

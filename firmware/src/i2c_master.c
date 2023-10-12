@@ -3,6 +3,7 @@
 #include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "app.h"
 #include "i2c_master.h"
 
 #define I2C_BAUDRATE_COUNTER  (_XTAL_FREQ / 4 / _I2C_CLOCK_FREQENCY - 1)

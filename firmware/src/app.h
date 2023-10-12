@@ -11,6 +11,8 @@
 #define _ROTARY_24_PPR
 
 #pragma once
+#pragma warning disable 520
+#pragma warning disable 1498
 
 // CONFIG1
 #pragma config FOSC     = INTOSC    // INTOSC oscillator: I/O function on CLKIN pin

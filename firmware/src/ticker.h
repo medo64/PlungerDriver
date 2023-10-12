@@ -4,9 +4,7 @@
  * Timer that "ticks" 24 times a second
  * 
  * Defines:
- *   _ROTARY_INPUT_A_PORT <N>: Input A port; e.g. PORTAbits.RA0 
- *   _ROTARY_INPUT_B_PORT <N>: Input B port, e.g. PORTAbits.RA1
- *   _ROTARY_FILTER_DETENT:    Filter input to every 4th value (single detent)
+ *   _TICKER_USE_TIMER0: Use TMR0 for time management (default)
  */
 // 2023-10-09: Included port definition
 
@@ -15,19 +13,24 @@
 #include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "app.h"
+
+#if !defined(_TICKER_USE_TIMER0)
+    #define _TICKER_USE_TIMER0
+#endif
 
 
 /** Initialize timer0 */
-void timer0_init(void);
+void ticker_init(void);
 
 /** Reset timer */
-void timer0_reset(void);
+void ticker_reset(void);
 
 /** Check if timer was triggered (24tps) since last check */
-inline bool timer0_wasTriggered(void);
+inline bool ticker_wasTriggered(void);
 
 /** waits for a full tick (1/24th of a second) */
-void timer0_waitTick(void);
+void ticker_waitTick(void);
 
 /** waits N ticks (1/24th of a second each) */
-void timer0_waitTicks(uint8_t tickCount);
+void ticker_waitTicks(uint8_t tickCount);

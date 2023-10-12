@@ -4,7 +4,7 @@
 #include "rotary.h"
 #include "ssd1306.h"
 #include "watchdog.h"
-#include "timer0.h"
+#include "ticker.h"
 
 void init(void) {
     interruptsDisable();
@@ -23,7 +23,7 @@ void main(void) {
     
     i2c_master_init();
     ssd1306_init();
-    timer0_init();
+    ticker_init();
 
     ssd1306_writeLine16(" Plunger Driver ");
 
@@ -49,7 +49,7 @@ void main(void) {
             }
         }
 
-        if (timer0_wasTriggered()) {
+        if (ticker_wasTriggered()) {
             if (goneLeft) {
                 ssd1306_writeCharacter(0x1B);
             } else {

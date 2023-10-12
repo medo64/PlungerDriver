@@ -11,6 +11,7 @@
 #pragma once
 
 #include <xc.h>
+#include "app.h"
 
 #if !defined(_16F1454) && !defined(_16F1455) && !defined(_16F1459)
 #error Unsupported device
@@ -21,6 +22,7 @@
 #elif _WATCHDOG_INTERVAL > 256000
 #error Watchdog interval too large
 #endif
+
 
 /** Initializes watchdog timer. */
 void watchdog_init(void);

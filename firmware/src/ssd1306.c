@@ -2,6 +2,7 @@
 
 #include <xc.h>
 #include <stdint.h>
+#include "app.h"
 #include "i2c_master.h"
 #include "ssd1306.h"
 

@@ -1,4 +1,6 @@
+#include <xc.h>
 #include <stdint.h>
+#include "app.h"
 #include "rotary.h"
 
 #define CONCATENATE2(x,y,z)         x ## y ## z
