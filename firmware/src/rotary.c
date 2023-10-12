@@ -11,14 +11,14 @@
 uint8_t lastRotState = 0;
 uint8_t lastRotIndentState = 128;  // to filter movement in between indents a bit
 
-uint8_t getRotaryState() {  // figure out what state we're in
+uint8_t getRotaryState(void) {  // figure out what state we're in
     if (!ROTARY_INPUT_A_PORT_PIN && !ROTARY_INPUT_B_PORT_PIN) { return 0; }
     if ( ROTARY_INPUT_A_PORT_PIN && !ROTARY_INPUT_B_PORT_PIN) { return 1; }
     if ( ROTARY_INPUT_A_PORT_PIN &&  ROTARY_INPUT_B_PORT_PIN) { return 2; }
     return 3;
 }
 
-void rotary_init() {
+void rotary_init(void) {
     ROTARY_INPUT_A_TRIS_PIN = 1;
     ROTARY_INPUT_B_TRIS_PIN = 1;
 
@@ -27,7 +27,7 @@ void rotary_init() {
 }
 
 
-enum ROTARY_DIRECTION rotary_getDirection() {
+enum ROTARY_DIRECTION rotary_getDirection(void) {
     uint8_t currRotState = getRotaryState();
     if (currRotState != lastRotState) {
         uint8_t diff = (currRotState - lastRotState) & 0b11;

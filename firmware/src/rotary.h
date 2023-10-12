@@ -54,7 +54,7 @@ enum ROTARY_DIRECTION {
 
 
 /* Initialize rotary control. */
-void rotary_init();
+void rotary_init(void);
 
 /* Returns in which direction rotary with quadrature encoding moved. Must be called often. */
-enum ROTARY_DIRECTION rotary_getDirection();
+enum ROTARY_DIRECTION rotary_getDirection(void);

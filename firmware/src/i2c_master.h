@@ -29,7 +29,7 @@
 
 
 /** Initializes I2C as a master. */
-void i2c_master_init();
+void i2c_master_init(void);
 
 
 /** Starts a read operation. */

@@ -50,7 +50,7 @@
 
 
 /** Initializes Display. */
-void ssd1306_init();
+void ssd1306_init(void);
 
 
 #if defined(_SSD1306_DISPLAY_CONTROL)

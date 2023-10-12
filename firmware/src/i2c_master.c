@@ -32,7 +32,7 @@ void resetBus(void) {
     }
 }
 
-void i2c_master_init() {
+void i2c_master_init(void) {
     SSPCON1 = 0;  SSPCON2 = 0;  SSPSTAT = 0;  // reset all
 
     resetBus();

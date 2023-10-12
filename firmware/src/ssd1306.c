@@ -100,7 +100,7 @@ void writeRawDataZeros(const uint8_t count) {
 }
 
 
-void ssd1306_init() {
+void ssd1306_init(void) {
     writeRawCommand1(SSD1306_SET_DISPLAY_OFF);                                    // Set Display Off
     writeRawCommand2(SSD1306_SET_DISPLAY_CLOCK_DIVIDE_RATIO, 0x80);               // Set Display Clock Divide Ratio/Oscillator Frequency
     writeRawCommand2(SSD1306_SET_MULTIPLEX_RATIO, _SSD1306_DISPLAY_HEIGHT - 1);   // Set Multiplex Ratio (line count - 1)
