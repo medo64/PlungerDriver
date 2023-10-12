@@ -1,17 +1,20 @@
 /* Josip Medved <jmedved@jmedved.com> * www.medo64.com * MIT License */
 
 /**
- * Handling rotary button with quadrature encoding
+ * Handling rotary button with quadrature encoding.
+ * This library specifically interfaces with PEC12R whose encoding never
+ * actually goes to 00 (01 10 11 01 10 11 ...)
  * 
  * Defines:
  *   _ROTARY_INPUT_A_PORT <X>: Input A port; e.g. A
- *   _ROTARY_INPUT_A_PIN <X>: Input A port TRIS value; e.g. 0
+ *   _ROTARY_INPUT_A_PIN <X>:  Input A port TRIS value; e.g. 0
  *   _ROTARY_INPUT_B_PORT <X>: Input B port; e.g. A
- *   _ROTARY_INPUT_B_PIN <X>: Input B port TRIS value, e.g. 0
- *   _ROTARY_12_PPR: Use 12 pulses per rotation
- *   _ROTARY_24_PPR: Use 24 pulses per rotation
+ *   _ROTARY_INPUT_B_PIN <X>:  Input B port TRIS value, e.g. 0
+ *   _ROTARY_DETENTS:          Rotary switch uses detents
+ * Required:
+ *   Set pins as input (TRIS)
  */
-// 2023-10-10: Included port definition
+// 2023-10-10: Setup to work with PEC12R
 
 #pragma once
 
