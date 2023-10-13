@@ -5,6 +5,7 @@
 #include "ssd1306.h"
 #include "watchdog.h"
 #include "ticker.h"
+#include "motor.h"
 
 #define MENU_PROFILE1  1
 #define MENU_PROFILE2  2
@@ -81,10 +82,20 @@ void execMain(void) {
                 case MENU_PROFILE5:
                     break;
 
-                case MENU_FORWARD:
+                case MENU_FORWARD:  // just move it forward
+                    ssd1306_displayInvert();
+                    motor_setForward();
+                    while(io_in_rotButton()) { watchdog_clear(); }
+                    motor_setSleep();
+                    ssd1306_displayNormal();
                     break;
 
-                case MENU_REVERSE:
+                case MENU_REVERSE:  // just move it in reverse
+                    ssd1306_displayInvert();
+                    motor_setReverse();
+                    while(io_in_rotButton()) { watchdog_clear(); }
+                    motor_setSleep();
+                    ssd1306_displayNormal();
                     break;
 
                 case MENU_SETTINGS:
