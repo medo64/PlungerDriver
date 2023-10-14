@@ -8,7 +8,6 @@
 #define _ROTARY_INPUT_A_PIN          4
 #define _ROTARY_INPUT_B_PORT         C
 #define _ROTARY_INPUT_B_PIN          5
-#define _ROTARY_24_PPR
 
 #pragma once
 #pragma warning disable 520

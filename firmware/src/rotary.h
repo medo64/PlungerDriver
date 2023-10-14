@@ -13,7 +13,7 @@
  * Required:
  *   Set pins as input (TRIS)
  */
-// 2023-10-10: Setup to work with PEC12R
+// 2023-10-14: Setup to work with PEC12R
 
 #pragma once
 
@@ -39,12 +39,6 @@
 #error Must define _ROTARY_INPUT_B_PIN
 #elif (_ROTARY_INPUT_B_PIN < 0) || (_ROTARY_INPUT_B_PIN > 7)
 #error _ROTARY_INPUT_B_PIN must be between 0 and 7
-#endif
-
-#if !defined(_ROTARY_12_PPR) && !defined(_ROTARY_24_PPR)
-#error Must define either _ROTARY_12_PPR or _ROTARY_24_PPR
-#elif defined(_ROTARY_12_PPR) && defined(_ROTARY_24_PPR)
-#error Cannot define both _ROTARY_12_PPR and _ROTARY_24_PPR
 #endif
 
 
