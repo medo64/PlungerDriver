@@ -6,7 +6,6 @@
                    projectFiles="true">
       <itemPath>ssd1306.h</itemPath>
       <itemPath>app.h</itemPath>
-      <itemPath>i2c_master.h</itemPath>
       <itemPath>watchdog.h</itemPath>
       <itemPath>rotary.h</itemPath>
       <itemPath>io.h</itemPath>
@@ -23,7 +22,6 @@
                    projectFiles="true">
       <itemPath>ssd1306.c</itemPath>
       <itemPath>app.c</itemPath>
-      <itemPath>i2c_master.c</itemPath>
       <itemPath>watchdog.c</itemPath>
       <itemPath>rotary.c</itemPath>
       <itemPath>io.c</itemPath>

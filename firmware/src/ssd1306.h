@@ -2,7 +2,10 @@
 
 /**
  * Handling SSD1306 display output
- * 
+ *
+ * Requires:
+ *   _XTAL_FREQ <N>:               Frequency in Hz
+ *
  * Defines:
  *   _SSD1306_DISPLAY_ADDRESS <N>: I2C address; default is 0x3C
  *   _SSD1306_DISPLAY_HEIGHT <N>:  Display height; can be 32 or 64
@@ -16,17 +19,27 @@
  *   _SSD1306_DISPLAY_CONTROL:     Allows display control (displayOff, displayOn, displayInvert, displayNormal, displayFlip)
  *   _SSD1306_CONTRAST_CONTROL:    Allows contrast control (setContrast)
  *   _SSD1306_DISPLAY_FLIP:        Flips screen to other direction
- * Requires:
- *   i2c_master: Call "i2c_master_init" before ssd1306_init
+ *   _SSD1306_EXTERNAL_I2C_MASTER: Uses external I2C implementation instead of the built-in one
  */
 // 2023-10-10: Expanded functionality
+// 2023-10-14: Internal I2C support
 
 #pragma once
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "app.h"
+#if defined(_SSD1306_EXTERNAL_I2C_MASTER)
 #include "i2c_master.h"
+#endif
 
+#if !defined(_16F1454) && !defined(_16F1455)
+#error Unsupported device
+#endif
+
+#if !defined(_XTAL_FREQ)
+#error Must define _XTAL_FREQ
+#endif
 
 #if !defined(_SSD1306_DISPLAY_ADDRESS)
     #define _SSD1306_DISPLAY_ADDRESS  0x3C

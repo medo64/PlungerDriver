@@ -2,6 +2,7 @@
 #include "app.h"
 #include "appMain.h"
 #include "io.h"
+#include "motor.h"
 #include "rotary.h"
 #include "ssd1306.h"
 #include "watchdog.h"
@@ -22,8 +23,9 @@ void main(void) {
     init();
     watchdog_init();
 
-    i2c_master_init();
     ssd1306_init();
+
+    motor_init();
     rotary_init();
     ticker_init();
 
