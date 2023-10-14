@@ -22,95 +22,51 @@ uint8_t lastMenuSelected = 0;
 uint8_t currMenuSelected = 1;
 uint8_t currMenuEntered = 0;
 
-enum ROTARY_DIRECTION pendingRotaryDirection = ROTARY_DIRECTION_NONE;
-
-bool pendingRotaryButton = false;
-bool pendingInternalButton = false;
-bool pendingExternalButton = false;
-
-bool lastRotaryButton = false;
-bool lastInternalButton = false;
-bool lastExternalButton = false;
-
 void execMain(void) {
     while(true) {
         watchdog_clear();
 
-        // figure if internal button was pressed (and ignore it until release))
-        bool currInternalButton = io_in_internalButton();
-        if (currInternalButton != lastInternalButton) {
-            lastInternalButton = currInternalButton;
-            if (currInternalButton) { pendingInternalButton = true; }
-        }
-
-        // figure if external button was pressed (and ignore it until release))
-        bool currExternalButton = io_in_externalButton();
-        if (currExternalButton != lastExternalButton) {
-            lastExternalButton = currExternalButton;
-            if (currExternalButton) { pendingExternalButton = true; }
-        }
-
-        // figure if rotary button was pressed (and ignore it until release))
-        bool currRotaryButton = io_in_rotButton();
-        if (currRotaryButton != lastRotaryButton) {
-            lastRotaryButton = currRotaryButton;
-            if (currRotaryButton) { pendingRotaryButton = true; }
-        }
-
         // figure if rotary button moved
         switch (rotary_getDirection()) {
-            case ROTARY_DIRECTION_LEFT: pendingRotaryDirection = ROTARY_DIRECTION_LEFT; break;
-            case ROTARY_DIRECTION_RIGHT: pendingRotaryDirection = ROTARY_DIRECTION_RIGHT; break;
+            case ROTARY_DIRECTION_LEFT:
+                if (currMenuSelected > 1) { currMenuSelected--; }
+                break;
+            case ROTARY_DIRECTION_RIGHT:
+                if (currMenuSelected < MENU_MAX) { currMenuSelected++; }
+                break;
             default: break;
         }
 
-        // handle internal and external button (same action))
-        if (pendingInternalButton || pendingExternalButton) {
-            pendingInternalButton = false;
-            pendingExternalButton = false;
-            // drive
-        }
+        switch (currMenuSelected) {
+            case MENU_PROFILE1:
+            case MENU_PROFILE2:
+            case MENU_PROFILE3:
+            case MENU_PROFILE4:
+            case MENU_PROFILE5:
+                break;
 
-        // pending rotary button
-        if (pendingRotaryButton) {
-            pendingRotaryButton = false;
-            switch (currMenuSelected) {
-                case MENU_PROFILE1:
-                case MENU_PROFILE2:
-                case MENU_PROFILE3:
-                case MENU_PROFILE4:
-                case MENU_PROFILE5:
-                    break;
-
-                case MENU_FORWARD:  // just move it forward
+            case MENU_FORWARD: {  // just move it forward
+                if (io_in_internalButton() || io_in_externalButton() || io_in_rotButton()) {
                     ssd1306_displayInvert();
                     motor_setForward();
-                    while(io_in_rotButton()) { watchdog_clear(); }
+                    while (io_in_internalButton() || io_in_externalButton() || io_in_rotButton()) { watchdog_clear(); }
                     motor_setSleep();
                     ssd1306_displayNormal();
-                    break;
+                } 
+            } break;
 
-                case MENU_REVERSE:  // just move it in reverse
+            case MENU_REVERSE: {  // just move it in reverse
+                if (io_in_internalButton() || io_in_externalButton() || io_in_rotButton()) {
                     ssd1306_displayInvert();
                     motor_setReverse();
-                    while(io_in_rotButton()) { watchdog_clear(); }
+                    while (io_in_internalButton() || io_in_externalButton() || io_in_rotButton()) { watchdog_clear(); }
                     motor_setSleep();
                     ssd1306_displayNormal();
-                    break;
+                }
+            } break;
 
-                case MENU_SETTINGS:
-                    break;
-            }
-        }
-
-        // figure out what to do with rotary direction
-        if (pendingRotaryDirection != ROTARY_DIRECTION_NONE) {
-            if ((pendingRotaryDirection == ROTARY_DIRECTION_LEFT) && (currMenuSelected > 1)) {
-                currMenuSelected--;
-            } else if ((pendingRotaryDirection == ROTARY_DIRECTION_RIGHT) && (currMenuSelected < MENU_MAX)) {
-                currMenuSelected++;
-            }
-            pendingRotaryDirection = ROTARY_DIRECTION_NONE;
+            case MENU_SETTINGS:
+                break;
         }
 
         // draw menu
@@ -133,5 +89,4 @@ void execMain(void) {
             }
         }
     }
-
 }
