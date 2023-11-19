@@ -12,14 +12,14 @@
 |  1 | DS LED (0805)                       | DS1     | 3147-B1701UYG-20D000114U1930CT-ND |
 |  1 | DS OLED 128x32 SPI (2w)             | DS2     |                                   |
 |  1 | Fuse 500mA 63V (1206)               | F1      | 507-1803-1-ND                     |
-|  1 | J MCV 1,5/ 2-G-3,81 (2w)            | J1      | ED2819-ND                         |
+|  1 | J MCV 1,5/ 2-G-3,81 (2w)            | J1      | ED2808-ND                         |
 |  1 | J JST S2B-XH-A (2w)                 | J3      | 455-S2B-XH-A-ND                   |
 |  1 | J JST S2B-PH-K-S (2w)               | J3      | 455-1719-ND                       |
 |  1 | R 1 0.125W (0805)                   | R1      | RMCF0805FT1R00CT-ND               |
 |  1 | R 390 0.125W (0805)                 | R2      | RMCF0805FT390RCT-ND               |
 |  2 | R 1K 0.125W (0805)                  | R3-R4   | RMCF0805FT1K00CT-ND               |
 |  7 | R 10K 0.125W (0805)                 | R5-R11  | RMCF0805FT10K0CT-ND               |
-|  1 | R Rotary 24ppr (5w)                 | S1      | PEC12R-4225F-S0024ND              |
+|  1 | S Rotary 24ppr (5w)                 | S1      | PEC12R-4225F-S0024ND              |
 |  1 | S Tactile SPST 6x3.5 (ww)           | S2      | CKN12307-ND                       |
 |  1 | U Micro PIC16F1454 (TSSOP-14)       | U1      | PIC16F1454-I/ST-ND                |
 |  1 | U Driver TB67H450AFNG (SOIC-8)      | U2      | 264-TB67H450AFNGELCT-ND           |
