@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include "app.h"
 #include "appMain.h"
+#include "appProfile.h"
 #include "appSettings.h"
 #include "io.h"
 #include "rotary.h"
@@ -110,7 +111,9 @@ void execMain(void) {
                     ssd1306_displayNormal();
                     while (io_in_internalButton() || io_in_externalButton()) { watchdog_clear(); }
                 } else if (io_in_rotButton()) {  // go into profile settings
-                    // TODO: Settings
+                    while (io_in_rotButton()) { watchdog_clear(); }
+                    execProfile(currMenuSelected - MENU_PROFILE1);
+                    lastMenuSelected = 0;  // redraw
                 }
                 break;
 
