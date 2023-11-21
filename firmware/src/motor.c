@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "motor.h"
+#include "settings.h"
 
 
 void motor_init(void) {
@@ -8,13 +9,23 @@ void motor_init(void) {
 }
 
 void motor_setForward(void) {
-    LATA5 = 0;
-    LATA4 = 1;
+    if (!settings_getIsDriveFlipped()) {
+        LATA5 = 0;
+        LATA4 = 1;
+    } else {
+        LATA5 = 1;
+        LATA4 = 0;
+    }
 }
 
 void motor_setReverse(void) {
-    LATA5 = 1;
-    LATA4 = 0;
+    if (!settings_getIsDriveFlipped()) {
+        LATA5 = 1;
+        LATA4 = 0;
+    } else {
+        LATA5 = 1;
+        LATA4 = 0;
+    }
 }
 
 void motor_setBrake(void) {

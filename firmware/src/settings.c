@@ -93,6 +93,18 @@ void settings_setIsDisplayFlipped(bool value) {
     }
 }
 
+bool settings_getIsDriveFlipped(void) {
+    return (Settings.Flags & 0x40) != 0;
+}
+
+void settings_setIsDriveFlipped(bool value) {
+    if (value) {
+        Settings.Flags |= 0x40;
+    } else {
+        Settings.Flags &= ~0x40;
+    }
+}
+
 
 uint8_t settings_getPush(uint8_t index) {
     return Settings.Push[index];

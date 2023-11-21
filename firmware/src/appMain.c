@@ -1,5 +1,7 @@
 #include <stdbool.h>
+#include "app.h"
 #include "appMain.h"
+#include "appSettings.h"
 #include "io.h"
 #include "rotary.h"
 #include "ssd1306.h"
@@ -7,6 +9,10 @@
 #include "ticker.h"
 #include "motor.h"
 #include "settings.h"
+
+#if !defined(_XTAL_FREQ)
+#error Must define _XTAL_FREQ
+#endif
 
 #define MENU_PROFILE1  1
 #define MENU_PROFILE2  2
@@ -18,10 +24,6 @@
 #define MENU_SETTINGS  8
 
 #define MENU_MAX       8
-
-uint8_t lastMenuSelected = 0;
-uint8_t currMenuSelected = 1;
-uint8_t currMenuEntered = 0;
 
 void drawProfileMenuDuration(uint8_t value) {
     if (value < 10) {
@@ -65,6 +67,11 @@ void drawProfileMenuItem(uint8_t index) {
 }
 
 void execMain(void) {
+    uint8_t lastMenuSelected = 0;
+    uint8_t currMenuSelected = 1;
+
+    ssd1306_displayFlip(settings_getIsDisplayFlipped());
+
     while(true) {
         watchdog_clear();
 
@@ -129,7 +136,9 @@ void execMain(void) {
 
             case MENU_SETTINGS:
                 if (io_in_rotButton()) {  // go into settings
-                    // TODO: Settings
+                    while (io_in_rotButton()) { watchdog_clear(); }
+                    execSettings();
+                    lastMenuSelected = 0;  // redraw
                 }
                 break;
         }

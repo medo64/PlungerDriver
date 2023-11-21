@@ -12,6 +12,9 @@ char* settings_getGreetingLine2(void);
 bool settings_getIsDisplayFlipped(void);
 void settings_setIsDisplayFlipped(bool value);
 
+bool settings_getIsDriveFlipped(void);
+void settings_setIsDriveFlipped(bool value);
+
 uint8_t settings_getPush(uint8_t index);
 void settings_setPush(uint8_t index, uint8_t value);
 
