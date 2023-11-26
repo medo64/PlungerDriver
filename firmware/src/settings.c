@@ -7,7 +7,7 @@
 #define _SETTINGS_FLASH_RAW { \
                               ' ',  ' ',  ' ',  ' ',  'P',  'l',  'u',  'n',  'g',  'e',  'r',  ' ',  ' ',  ' ',  ' ',  ' ',  \
                               ' ',  ' ',  ' ',  ' ',  ' ',  ' ',  'D',  'r',  'i',  'v',  'e',  'r',  ' ',  ' ',  ' ',  ' ',  \
-                              0x00, 250,  240,  230,  220,  210,   10,   10,   10,   10,   10,    5,    5,    5,    5,    5, \
+                              0x00,  10,   20,   30,   50,  100,   10,   10,   10,   10,   10,    5,   10,   15,   25,   50,  \
                             }  // reserving space because erase block is block 32-word (32-bytes as only low bytes are used)
 #define _SETTINGS_FLASH_LOCATION 0x1F80
 const uint8_t _SETTINGS_PROGRAM[] __at(_SETTINGS_FLASH_LOCATION) = _SETTINGS_FLASH_RAW;
