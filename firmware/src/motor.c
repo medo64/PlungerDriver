@@ -23,8 +23,8 @@ void motor_setReverse(void) {
         LATA5 = 1;
         LATA4 = 0;
     } else {
-        LATA5 = 1;
-        LATA4 = 0;
+        LATA5 = 0;
+        LATA4 = 1;
     }
 }
 
