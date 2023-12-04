@@ -30,4 +30,4 @@
 
 |  # | Part name                                     | Location                                                           |
 |---:|-----------------------------------------------|--------------------------------------------------------------------|
-|  1 | Bringsmart Motor 6V 30rpm N20 Screw M3x55     | [AliExpress](https://www.aliexpress.us/item/2251832736580698.html) |
+|  1 | Bringsmart Motor 6V 300rpm N20 Screw M3x55    | [AliExpress](https://www.aliexpress.us/item/2251832736580698.html) |
