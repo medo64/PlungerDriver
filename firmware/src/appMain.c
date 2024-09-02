@@ -10,6 +10,7 @@
 #include "ticker.h"
 #include "motor.h"
 #include "settings.h"
+#include "system.h"
 
 #if !defined(_XTAL_FREQ)
 #error Must define _XTAL_FREQ
@@ -49,7 +50,7 @@ void drawProfileMenuDuration(uint8_t value) {
 
 void drawProfileMenuItem(uint8_t index) {
     if (index < 9) {
-        ssd1306_write16("Profile ");
+        ssd1306_writeText16("Profile ");
         ssd1306_writeCharacter16(0x30 + index + 1);
         ssd1306_writeLine16("       ");
     } else {

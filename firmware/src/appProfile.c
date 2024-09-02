@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include "app.h"
 #include "appMain.h"
 #include "io.h"
 #include "rotary.h"
@@ -7,6 +6,7 @@
 #include "watchdog.h"
 #include "ticker.h"
 #include "settings.h"
+#include "system.h"
 
 #if !defined(_XTAL_FREQ)
 #error Must define _XTAL_FREQ

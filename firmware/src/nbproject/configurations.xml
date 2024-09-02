@@ -15,6 +15,8 @@
       <itemPath>settings.h</itemPath>
       <itemPath>appSettings.h</itemPath>
       <itemPath>appProfile.h</itemPath>
+      <itemPath>ssd1306_font.h</itemPath>
+      <itemPath>system.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -34,6 +36,7 @@
       <itemPath>settings.c</itemPath>
       <itemPath>appSettings.c</itemPath>
       <itemPath>appProfile.c</itemPath>
+      <itemPath>system.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -51,7 +54,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PK5Tool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.45</languageToolchainVersion>
+        <languageToolchainVersion>2.46</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
